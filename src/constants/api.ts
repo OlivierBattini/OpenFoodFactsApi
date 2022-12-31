@@ -5,3 +5,9 @@ export enum ApiPrefix {
 }
 
 export const API_PAGINATION = 10;
+
+export enum ApiInfo {
+  TITLE = 'OpenFoodFacts test API',
+  DESCRIPTION = 'This API allows querying OpenFoodFacts database products by code or product_name',
+  VERSION = '0.1',
+}

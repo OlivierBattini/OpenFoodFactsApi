@@ -1,4 +1,5 @@
 import { Controller, Get, Param } from '@nestjs/common';
+import { ApiResponse } from '@nestjs/swagger';
 
 import { ApiPrefix } from '../../constants/api';
 import { HttpError } from '../errors/http.error';
@@ -15,6 +16,11 @@ export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   @Get(ApiPrefix.PRODUCTS_BY_CODE)
+  @ApiResponse({
+    status: 200,
+    description: 'Product found',
+    type: GetProductByCodeResponse,
+  })
   async getProductByCode(
     @Param() request: GetProductByCodeRequest,
   ): Promise<GetProductByCodeResponse> {
@@ -37,6 +43,11 @@ export class ProductController {
   }
 
   @Get(ApiPrefix.PRODUCTS_BY_NAME)
+  @ApiResponse({
+    status: 200,
+    description: 'Products found',
+    type: GetProductsByNameResponse,
+  })
   async getProductByName(
     @Param() request: GetProductsByNameRequest,
   ): Promise<GetProductsByNameResponse> {
