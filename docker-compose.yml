@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+
+  mongodb:
+    image: mongo
+    environment:
+      - MONGO_INITDB_DATABASE=off
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=Kd8RYxuuD9WokFtY
+    volumes:
+      - ./mongo-seed:/docker-entrypoint-initdb.d
+    ports:
+      - 27017:27017
