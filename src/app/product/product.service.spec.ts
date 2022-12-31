@@ -4,6 +4,9 @@ import { Env } from '../../config/env';
 import { DatabaseService } from '../data/database.service';
 import { ProductService } from './product.service';
 
+// You may want to change timeout according to mongodb performance
+jest.setTimeout(15000);
+
 describe('ProductService', () => {
   beforeAll(async () => {
     await mongoose.connect(Env.DB_URL);
