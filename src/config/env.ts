@@ -8,6 +8,11 @@ export class Env {
     return parseInt(process.env.HTTP_PORT) || 3000;
   }
 
+  /** Caching system TTL in milliseconds */
+  public static get HTTP_CACHE_TTL_MS(): number {
+    return parseInt(process.env.HTTP_CACHE_TTL_MS) || 3600000; // 1 h in ms
+  }
+
   /** Database connection URL */
   public static get DB_URL(): string {
     return process.env.DB_URL || 'mongodb://localhost:27017';

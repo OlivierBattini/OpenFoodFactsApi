@@ -8,13 +8,16 @@ import { ProductService } from './product.service';
 jest.setTimeout(15000);
 
 describe('ProductService', () => {
+  // Manage mongo resources before and after test
   beforeAll(async () => {
     await mongoose.connect(Env.DB_URL);
+  });
+  afterAll(async () => {
+    await mongoose.disconnect();
   });
 
   let databaseService: DatabaseService;
   let productService: ProductService;
-
   beforeEach(async () => {
     databaseService = new DatabaseService(mongoose.connection);
     productService = new ProductService(databaseService);

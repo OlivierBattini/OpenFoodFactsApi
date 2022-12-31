@@ -1,4 +1,10 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import {
+  CacheInterceptor,
+  Controller,
+  Get,
+  Param,
+  UseInterceptors,
+} from '@nestjs/common';
 import { ApiResponse } from '@nestjs/swagger';
 
 import { ApiPrefix } from '../../constants/api';
@@ -11,6 +17,7 @@ import {
 } from './product.dto';
 import { ProductService } from './product.service';
 
+@UseInterceptors(CacheInterceptor)
 @Controller(ApiPrefix.PRODUCTS)
 export class ProductController {
   constructor(private readonly productService: ProductService) {}

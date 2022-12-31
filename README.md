@@ -8,5 +8,5 @@ This project was created for a technical test, that is create an API to search t
 - [x] Develop the application using TypeScript
 - [x] Ideally, use NestJS
 - [x] The project has at least one relevant test
-- [ ] The API documentation is automatically generated
-- [ ] **BONUS** : To avoid querying too much the database, implement a caching solution
+- [x] The API documentation is automatically generated
+- [x] **BONUS** : To avoid querying too much the database, implement a caching solution
