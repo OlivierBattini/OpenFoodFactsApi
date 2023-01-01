@@ -48,7 +48,7 @@ API documentation is reachable at `http://localhost:3000/api`.
 
 What more could be done / improved ?
 
-- Add more security [following OWASP recommendations]((https://cheatsheetseries.owasp.org/cheatsheets/Nodejs_Security_Cheat_Sheet.html)) and using middleware such as :
+- Add more security [following OWASP recommendations](https://cheatsheetseries.owasp.org/cheatsheets/Nodejs_Security_Cheat_Sheet.html) and using middleware such as :
   - Helmet
   - Express-rate-limit
   - ...
