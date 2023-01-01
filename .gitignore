@@ -1,4 +1,7 @@
+# Project related
 .env
+/mongo/products.bson
+/mongo/products.metadata.json
 
 # compiled output
 /dist
