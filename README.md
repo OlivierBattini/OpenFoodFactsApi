@@ -1,73 +1,57 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Open Food Facts API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Project description
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+This project was created for a technical test, that is create an API to search the [Open Food Facts open database](https://fr.openfoodfacts.org/data) with the following constraints :
 
-## Description
+- [x] We need to query the API by `code` or `product_name`
+- [x] Develop the application using TypeScript
+- [x] Ideally, use NestJS
+- [x] The project has at least one relevant test
+- [x] The API documentation is automatically generated
+- [x] **BONUS** : To avoid querying too much the database, implement a caching solution
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## How to install
 
-## Installation
+### Prerequisites
 
-```bash
-$ npm install
-```
+In order to run the project, you first need to download and/or install :
 
-## Running the app
+- [NodeJS 18.12.1 LTS and tools](https://github.com/nvm-sh/nvm#readme)
+- [Docker](https://docs.docker.com/get-docker/)
+- [A copy of the Open Food Facts database dump](https://static.openfoodfacts.org/data/openfoodfacts-mongodbdump.tar.gz)
 
-```bash
-# development
-$ npm run start
+### Install steps
 
-# watch mode
-$ npm run start:dev
+1. Clone this repository
+2. Install project dependencies by running the command `npm i`
+3. Copy the file `.env.example` to `.env`
+4. Untar the Open Food Facts database dump and put the files `products.bson` and `products.metadata.json` in the `mongo` directory
+5. Start the Docker container using the command `npm run docker` (at first run, will take several minutes for MongoDB to restore and index data)
+6. You can optionnally run the test suite using the command `npm run test` (initialized MongoDB container required)
+7. Start the NestJS application using the command `npm start`
+8. Query the API on `http://localhost:3000/` using your favorite tool (curl, Postman, Insomnia...)
 
-# production mode
-$ npm run start:prod
-```
+### Using your own copy of MongoDB Open Food Facts database
 
-## Test
+If you come with your own database or Docker container :
 
-```bash
-# unit tests
-$ npm run test
+1. Follow install steps 1, 2, 3
+2. Open the `.env` file, modify `DB_*` parameters accordingly to your database configuration
+3. Follow install steps 6, 7, 8
 
-# e2e tests
-$ npm run test:e2e
+## OpenAPI documentation
 
-# test coverage
-$ npm run test:cov
-```
+API documentation is reachable at `http://localhost:3000/api`.
 
-## Support
+## To go further
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+What more could be done / improved ?
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- Add more security [following OWASP recommendations](https://cheatsheetseries.owasp.org/cheatsheets/Nodejs_Security_Cheat_Sheet.html) and using middleware such as :
+  - Helmet
+  - Express-rate-limit
+  - ...
+- Add to Docker compose file a node container configuration to have fully deployable solution
+- Add CI/CD pipelines (linting, testing, deploying...)
+- Document API product fields using [yaml files from the Open Food Facts server repository](https://github.com/openfoodfacts/openfoodfacts-server/blob/main/docs/reference/schemas/product.yaml) (?)
